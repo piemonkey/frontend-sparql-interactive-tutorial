@@ -55,6 +55,7 @@ pre {
   background: rgb(247, 246, 243);
   border-radius: 3px;
   padding: 32px;
+  overflow-x: scroll;
 }
 
 ul:not([class]) {
