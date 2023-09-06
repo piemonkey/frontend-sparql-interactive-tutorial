@@ -4,7 +4,11 @@ import Yasgui from '@triply/yasgui';
 
 export default class YasguiComponent extends Component {
   yasgui;
-  sparqlEndpoint = this.args.sparqlEndpoint ?? '/sparql';
+  sparqlEndpoint =
+    (this.args.sparqlEndpoint ?? '/sparql') +
+    (this.args.defaultGraph
+      ? `?default-graph-uri=${encodeURIComponent(this.args.defaultGraph)}`
+      : '');
   yasguiConfig = {
     requestConfig: {
       endpoint: this.sparqlEndpoint,

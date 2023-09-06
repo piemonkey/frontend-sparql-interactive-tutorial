@@ -1,8 +1,8 @@
 import Component from '@glimmer/component';
 
 export default class SectionsModifiersComponent extends Component {
-  peopleGraph = 'http://mu.semte.ch/graphs/people';
-  booksGraph = 'http://mu.semte.ch/graphs/books';
+  peopleGraph = 'http://mu.semte.ch/graphs/people/';
+  booksGraph = 'http://mu.semte.ch/graphs/books/';
 
   firstExampleQuery =
     'PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n' +
