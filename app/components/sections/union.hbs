@@ -23,9 +23,11 @@
 PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 
 SELECT ?title WHERE {
-  ?book dcterms:title ?title .
-} UNION {
-  ?book rdfs:label ?title .
+  {
+    ?book dcterms:title ?title .
+  } UNION {
+    ?book rdfs:label ?title .
+  }
 }</code></pre>
 
 <p>

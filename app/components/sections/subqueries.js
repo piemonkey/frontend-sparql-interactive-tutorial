@@ -3,6 +3,7 @@ import Component from '@glimmer/component';
 export default class SectionsSubqueriesComponent extends Component {
   defaultQuery =
     'PREFIX : <http://mu.semte.ch/graphs/books/>\n' +
+    'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n' +
     'SELECT ?genre (SUM(?p) AS ?price) (SUM(?p) / xsd:float(SAMPLE(?totalPrice)) * 100 AS ?ratio)\n' +
     'WHERE {\n' +
     '  ?book :genre ?genre ;\n' +

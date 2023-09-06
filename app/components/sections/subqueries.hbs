@@ -11,6 +11,7 @@
 
 {{!-- prettier-ignore --}}
 {{!-- <pre><code>PREFIX : &lt;http://example.com/&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 
 SELECT ?genre ?price (?price / SAMPLE(?totalPrice) * 100 AS ?ratio) WHERE {
   ?book :genre ?genre;
@@ -29,4 +30,4 @@ GROUP BY ?genre</code></pre> --}}
   genre's price.
 </p>
 
-<Yasgui @defaultQuery={{this.defaultQuery}} @readOnly={{true}} />
+<Yasgui @defaultQuery={{this.defaultQuery}} />
