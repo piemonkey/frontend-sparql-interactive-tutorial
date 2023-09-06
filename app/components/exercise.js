@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import fetch from 'fetch';
+import fetch, { Headers } from 'fetch';
 import { tracked } from '@glimmer/tracking';
 
 export default class ExerciseComponent extends Component {
@@ -28,6 +28,7 @@ export default class ExerciseComponent extends Component {
       )}&otherQuery=${encodeURIComponent(query)}`,
       {
         method: 'GET',
+        headers: new Headers({ Accept: 'application/vnd.api+json' }),
       }
     );
     const json = await response.json();
