@@ -9,25 +9,25 @@
   scoping works.
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX : &lt;http://example.com/&gt;
-PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-
-SELECT ?genre ?price (?price / SAMPLE(?totalPrice) * 100 AS ?ratio) WHERE {
-  ?book :genre ?genre;
-        :price ?price .
-  {
-    SELECT (SUM(?p) AS ?totalPrice WHERE {
-      ?book :price ?p .
-    }
-  }
-}
-GROUP BY ?genre</code></pre> --}}
-
 <p>
   In this example, we use a subquery to find the sum total of all book prices,
   then we get book prices per genre and calculate what the ratio is of that
   genre's price.
 </p>
 
-<Yasgui @defaultGraph="http://mu.semte.ch/graphs/books/" @defaultQuery={{this.defaultQuery}} />
+<Yasgui @defaultGraph="http://mu.semte.ch/graphs/books/" @defaultQuery='
+PREFIX : <http://mu.semte.ch/graphs/books/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?genre (SUM(?p) AS ?price) (SUM(?p) / xsd:float(SAMPLE(?totalPrice)) * 100 AS ?ratio)
+WHERE {
+  ?book :genre ?genre ;
+        :price ?p .
+  {
+    SELECT (SUM(?p) AS ?totalPrice)
+    WHERE {
+      ?book :price ?p .
+    }
+  }
+}
+GROUP BY ?genre
+' />

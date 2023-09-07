@@ -23,21 +23,22 @@
   query below
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-PREFIX mo: &lt;http://purl.org/ontology/mo/&gt;
+<Yasgui @defaultQuery='
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mo: <http://purl.org/ontology/mo/>
 
 CONSTRUCT {
   ?artist mo:collaborated_with ?otherArtist .
 }
 WHERE {
-  ?record a mo:Record.
+  ?record a mo:Record .
   ?record mo:track ?track .
-  ?artist a ?track .
+  ?artist foaf:made ?track .
   ?otherArtist foaf:made ?track .
   FILTER (?artist != ?otherArtist) .
-}</code></pre> --}}
-<Yasgui @defaultQuery={{this.exampleQuery}} @readOnly={{true}} />
+}
+LIMIT 100
+' @readOnly={{true}} />
 
 <p>
   Note the new
@@ -48,8 +49,19 @@ WHERE {
 </p>
 
 <Exercise
-  @validQuery={{this.validQuery}}
-  @defaultGraph={{this.defaultGraph}}
+  @validQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mo: <http://purl.org/ontology/mo/>
+CONSTRUCT {
+  ?artist mo:collaborated_with ?otherArtist .
+}
+WHERE {
+  ?artist foaf:made ?work .
+  ?otherArtist foaf:made ?work .
+}
+LIMIT 100
+' @defaultGraph='http://mu.semte.ch/graphs/music'
 >
   <p>
     Let's construct a graph of artists that have collaborated on a work. Use the

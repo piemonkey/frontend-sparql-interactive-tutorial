@@ -27,15 +27,16 @@
 :bob foaf:name &quot;Bob&quot; .
 :charlie foaf:name &quot;Charlie&quot; .</code></pre>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-
+<Yasgui
+  @defaultQuery='
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 SELECT ?person ?name
 WHERE {
   ?person foaf:name ?name .
 }
-ORDER BY ?name</code></pre> --}}
-<Yasgui @defaultQuery={{this.firstExampleQuery}} @defaultGraph={{this.peopleGraph}} @readOnly={{true}} />
+ORDER BY ?name
+' @defaultGraph='http://mu.semte.ch/graphs/people/'
+  @readOnly={{true}} />
 
 <p>
   By default
@@ -59,14 +60,14 @@ ORDER BY ?name</code></pre> --}}
 :robert :nickName &quot;Bob&quot; .
 :rob :nickName &quot;Bob&quot; .</code></pre>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX : &lt;http://example.com/&gt;
-
+<Yasgui @defaultQuery='
+PREFIX : <http://mu.semte.ch/graphs/people/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 SELECT DISTINCT ?nickName
 WHERE {
   ?person :nickName ?nickName .
-}</code></pre> --}}
-<Yasgui @defaultQuery={{this.secondExampleQuery}} @defaultGraph={{this.peopleGraph}} @readOnly={{true}} />
+}
+' @defaultGraph='http://mu.semte.ch/graphs/people/' />
 
 <p>
   In this case, the result will only contain
@@ -77,14 +78,14 @@ WHERE {
   following query
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX : &lt;http://example.com/&gt;
-
+<Yasgui @defaultQuery='
+PREFIX : <http://mu.semte.ch/graphs/people/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 SELECT DISTINCT ?person ?nickName
 WHERE {
   ?person :nickName ?nickName .
-}</code></pre> --}}
-<Yasgui @defaultQuery={{this.thirdExampleQuery}} @defaultGraph={{this.peopleGraph}} @readOnly={{true}} />
+}
+' @defaultGraph='http://mu.semte.ch/graphs/people/' @readOnly={{true}} />
 
 <p>
   returns two rows, since
@@ -148,16 +149,15 @@ WHERE {
 :discworld :genre &quot;Fantasy&quot; .
 :discworld :price 15 .</code></pre>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX : &lt;http://example.com/&gt;
-
+<Yasgui @defaultQuery='
+PREFIX : <http://mu.semte.ch/graphs/books/>
 SELECT ?genre (SUM(?price) AS ?totalPrice)
 WHERE {
-  ?book :genre ?genre;
-        :price ?price
+  ?book :genre ?genre ;
+        :price ?price .
 }
-GROUP BY ?genre</code></pre> --}}
-<Yasgui @defaultQuery={{this.fourthExampleQuery}} @defaultGraph={{this.booksGraph}} @readOnly={{true}} />
+GROUP BY ?genre
+' @defaultGraph='http://mu.semte.ch/graphs/books/' @readOnly={{true}} />
 
 <p>
   It's also possible to filter these aggregates based on the computed aggregate
@@ -169,14 +169,13 @@ GROUP BY ?genre</code></pre> --}}
   clause
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX : &lt;http://example.com/&gt;
-
+<Yasgui @defaultQuery='
+PREFIX : <http://mu.semte.ch/graphs/books/>
 SELECT ?genre (SUM(?price) AS ?totalPrice)
 WHERE {
-  ?book :genre ?genre;
-        :price ?price
+  ?book :genre ?genre ;
+        :price ?price .
 }
 GROUP BY ?genre
-HAVING (SUM(?price) &gt; 10)</code></pre> --}}
-<Yasgui @defaultQuery={{this.fifthExampleQuery}} @defaultGraph={{this.booksGraph}} @readOnly={{true}} />
+HAVING (SUM(?price) > 10)
+' @defaultGraph='http://mu.semte.ch/graphs/books/' @readOnly={{true}} />

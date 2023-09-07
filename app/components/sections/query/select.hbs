@@ -10,15 +10,14 @@
   <em class='italic'>triplestore</em>).
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-
+<Yasgui @defaultQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT ?thing ?type
-FROM &lt;http://example.org/ns/exampleGraph&gt;
+FROM <http://example.org/ns/exampleGraph>
 WHERE {
-	?thing rdf:type ?type .
-}</code></pre> --}}
-<Yasgui @defaultQuery={{this.firstExampleQuery}} @readOnly={{true}} />
+  ?thing rdf:type ?type .
+}
+' @readOnly={{true}} />
 
 <p>
   Let's dissect this query. The first thing we encounter is the
@@ -61,15 +60,15 @@ WHERE {
   pattern that follows. Let's look at an example:
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-PREFIX mo: &lt;http://purl.org/ontology/mo/&gt;
-
-SELECT ?idles WHERE {
-  ?idles foaf:name &quot;Idles&quot; .
+<Yasgui @defaultQuery='
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mo: <http://purl.org/ontology/mo/>
+SELECT ?idles
+WHERE {
+  ?idles foaf:name "IDLES" .
   ?idles a mo:MusicGroup .
-}</code></pre> --}}
-<Yasgui @defaultQuery={{this.secondExampleQuery}} @readOnly={{true}} />
+}
+' @readOnly={{true}} />
 
 <p>
   In the above query, the first pattern specifies that we will bind a resource
@@ -127,8 +126,13 @@ ex:NotIdlesBand foaf:name &quot;Idles&quot; .</code></pre>
 </p>
 
 <Exercise
-  @validQuery={{this.firstExerciseValidQuery}}
-  @defaultGraph={{this.defaultGraph}}
+  @validQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?type
+WHERE {
+  ?subject rdf:type ?type .
+}
+' @defaultGraph='http://mu.semte.ch/graphs/music'
 >
   <p>
     Let's start off with an exploratory query. We want to find out what types
@@ -143,8 +147,15 @@ ex:NotIdlesBand foaf:name &quot;Idles&quot; .</code></pre>
   </p>
 </Exercise>
 <Exercise
-  @validQuery={{this.secondExerciseValidQuery}}
-  @defaultGraph={{this.defaultGraph}}
+  @validQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mo: <http://purl.org/ontology/mo/>
+SELECT DISTINCT ?predicate
+WHERE {
+  ?musicArtist rdf:type mo:MusicArtist .
+  ?musicArtist ?predicate ?object .
+}
+' @defaultGraph='http://mu.semte.ch/graphs/music'
 >
   <p>
     Now that we know that our dataset is filled with musical data, let's see
@@ -160,8 +171,16 @@ ex:NotIdlesBand foaf:name &quot;Idles&quot; .</code></pre>
   </Hint>
 </Exercise>
 <Exercise
-  @validQuery={{this.thirdExerciseValidQuery}}
-  @defaultGraph={{this.defaultGraph}}
+  @validQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mo: <http://purl.org/ontology/mo/>
+SELECT ?massiveAttack
+WHERE {
+  ?massiveAttack rdf:type mo:MusicArtist .
+  ?massiveAttack foaf:name "Massive Attack" .
+}
+' @defaultGraph='http://mu.semte.ch/graphs/music'
 >
   <p>
     Given that
@@ -172,8 +191,17 @@ ex:NotIdlesBand foaf:name &quot;Idles&quot; .</code></pre>
   </p>
 </Exercise>
 <Exercise
-  @validQuery={{this.fourthExerciseValidQuery}}
-  @defaultGraph={{this.defaultGraph}}
+  @validQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mo: <http://purl.org/ontology/mo/>
+SELECT ?member
+WHERE {
+  ?massiveAttack rdf:type mo:MusicArtist .
+  ?massiveAttack foaf:name "Massive Attack" .
+  ?member mo:member_of ?massiveAttack .
+}
+' @defaultGraph='http://mu.semte.ch/graphs/music'
 >
   <p>
     One more! Now that we have the artist Massive Attack, let's find out who's

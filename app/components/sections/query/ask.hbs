@@ -17,14 +17,13 @@
   query has the following syntax
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-PREFIX mo: &lt;http://purl.org/ontology/mo/&gt;
-
+<Yasgui @defaultQuery='
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mo: <http://purl.org/ontology/mo/>
 ASK {
-  [a mo:MusicArtist] foaf:made [a mo:Release] .
-}</code></pre> --}}
-<Yasgui @defaultQuery={{this.exampleQuery}} @readOnly={{true}} />
+  [a mo:MusicArtist] foaf:made [a mo:Record] .
+}
+' @readOnly={{true}} />
 
 <p>
   In this case, we're asking if there exists any music artist who has made a
@@ -43,8 +42,15 @@ ASK {
 </p>
 
 <Exercise
-  @validQuery={{this.exerciseValidQuery}}
-  @defaultGraph={{this.defaultGraph}}
+  @validQuery='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mo: <http://purl.org/ontology/mo/>
+ASK
+{
+  ?artist foaf:based_near "Belgium" .
+  ?artist foaf:name "Blackwave" .
+}
+' @defaultGraph='http://mu.semte.ch/graphs/music'
 >
   <p>
     Let's find out if there are any artists who are based in Belgium with the

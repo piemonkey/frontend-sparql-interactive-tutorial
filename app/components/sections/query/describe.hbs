@@ -14,11 +14,10 @@
   would be
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX mo: &lt;http://purl.org/ontology/mo/&gt;
-
-DESCRIBE mo:MusicArtist</code></pre> --}}
-<Yasgui @defaultQuery={{this.firstExampleQuery}} @readOnly={{true}} />
+<Yasgui @defaultQuery='
+PREFIX mo: <http://purl.org/ontology/mo/>
+DESCRIBE mo:MusicArtist
+' @readOnly={{true}} />
 
 <p>
   Note that in this case, the class
@@ -28,17 +27,14 @@ DESCRIBE mo:MusicArtist</code></pre> --}}
 <p>We can also describe a specific instance of the class
 </p>
 
-{{!-- prettier-ignore --}}
-{{!-- <pre><code>PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-PREFIX mo: &lt;http://purl.org/ontology/mo/&gt;
-PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-PREFIX open: &lt;http://open.vocab.org/terms/&gt;
-
-DESCRIBE ?artist WHERE {
+<Yasgui @defaultQuery='
+PREFIX mo: <http://purl.org/ontology/mo/>
+DESCRIBE ?artist
+WHERE {
   ?artist a mo:MusicArtist .
-} LIMIT 1</code></pre> --}}
-<Yasgui @defaultQuery={{this.secondExampleQuery}} @readOnly={{true}} />
+}
+LIMIT 1
+' @readOnly={{true}} />
 
 <p>
   This query will describe a single instance of a mo:MusicArtist and the output

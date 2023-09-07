@@ -28,7 +28,7 @@ export default class YasguiComponent extends Component {
     this.yasgui
       .getTab()
       .yasqe.setValue(
-        this.args.defaultQuery ??
+        this.args.defaultQuery?.trim() ??
           'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n' +
             'SELECT ?predicate ?object\n' +
             'WHERE {\n' +
