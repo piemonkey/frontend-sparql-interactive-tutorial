@@ -36,7 +36,7 @@ WHERE {
 }
 ORDER BY ?name
 ' @defaultGraph='http://mu.semte.ch/graphs/people/'
-  @readOnly={{true}} />
+  />
 
 <p>
   By default
@@ -85,7 +85,7 @@ SELECT DISTINCT ?person ?nickName
 WHERE {
   ?person :nickName ?nickName .
 }
-' @defaultGraph='http://mu.semte.ch/graphs/people/' @readOnly={{true}} />
+' @defaultGraph='http://mu.semte.ch/graphs/people/' />
 
 <p>
   returns two rows, since
@@ -157,7 +157,7 @@ WHERE {
         :price ?price .
 }
 GROUP BY ?genre
-' @defaultGraph='http://mu.semte.ch/graphs/books/' @readOnly={{true}} />
+' @defaultGraph='http://mu.semte.ch/graphs/books/' />
 
 <p>
   It's also possible to filter these aggregates based on the computed aggregate
@@ -178,4 +178,4 @@ WHERE {
 }
 GROUP BY ?genre
 HAVING (SUM(?price) > 10)
-' @defaultGraph='http://mu.semte.ch/graphs/books/' @readOnly={{true}} />
+' @defaultGraph='http://mu.semte.ch/graphs/books/' />
